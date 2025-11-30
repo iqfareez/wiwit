@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Transactions;
 
+use App\Filament\Imports\TransactionImporter;
 use App\Filament\Resources\Transactions\Pages\ManageTransactions;
 use App\Models\Transaction;
 use BackedEnum;
@@ -11,6 +12,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\ImportAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Forms\Components\DatePicker;
@@ -99,6 +101,8 @@ class TransactionResource extends Resource
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
                 ]),
+                ImportAction::make()
+                    ->importer(TransactionImporter::class),
             ]);
     }
 
