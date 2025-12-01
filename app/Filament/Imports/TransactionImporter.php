@@ -2,10 +2,12 @@
 
 namespace App\Filament\Imports;
 
+use App\Models\Category;
 use App\Models\Transaction;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Number;
 
 class TransactionImporter extends Importer
@@ -15,16 +17,24 @@ class TransactionImporter extends Importer
     public static function getColumns(): array
     {
         return [
-            ImportColumn::make('user_id')
-                ->requiredMapping()
-                ->numeric()
-                ->rules(['required', 'integer']),
             ImportColumn::make('amount')
                 ->requiredMapping()
                 ->numeric()
                 ->rules(['required', 'integer']),
-            ImportColumn::make('category_id')
-                ->relationship('category', 'name'),
+            ImportColumn::make('category')
+                ->guess(['category'])
+                ->relationship(resolveUsing: function (string $state): ?Category {
+                    // Find or create category
+                    $category = Category::firstOrCreate(
+                        ['name' => $state],
+                        [
+                            'user_id' => Auth::id(),
+                            'is_active' => true,
+                        ]
+                    );
+
+                    return $category;
+                }),
             ImportColumn::make('notes')
                 ->guess(['description'])
                 ->rules(['string', 'nullable']),
@@ -36,7 +46,9 @@ class TransactionImporter extends Importer
 
     public function resolveRecord(): Transaction
     {
-        return new Transaction;
+        return new Transaction([
+            'user_id' => Auth::id(),
+        ]);
     }
 
     public static function getCompletedNotificationBody(Import $import): string
