@@ -1,0 +1,24 @@
+# Build context reductions
+.git
+node_modules
+vendor
+storage/logs/*
+storage/app/debugbar/*
+docker-compose*.yml
+Dockerfile*~
+.docker
+*.md
+tests
+docs
+*.log
+composer.phar
+phpunit.xml
+.idea
+.vscode
+/.github
+_ide_helper.php
+_ide_helper_models.php
+.env
+.env.*
+*.sqlite*
+bootstrap/cache/*.php
