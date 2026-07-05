@@ -22,4 +22,10 @@ Run the development server:
 composer dev
 ```
 
+Create Filament admin user:
+
+```bash
+php artisan make:filament-user
+```
+
 Then, navigate to `http://127.0.0.1:8000/admin/` in your browser to see the app running.
