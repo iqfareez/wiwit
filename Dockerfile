@@ -1,11 +1,12 @@
-FROM node:22-alpine AS frontend
+FROM node:24-alpine AS frontend
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
+COPY package.json package-lock.json ./
 
 RUN npm ci
 
+COPY resources/ ./resources/
 COPY vite.config.js ./
 COPY tailwind.config.js ./
 COPY postcss.config.js ./
@@ -22,8 +23,8 @@ WORKDIR /app
 COPY composer.json composer.lock ./
 
 USER root
+
 RUN install-php-extensions intl
-USER www-data
 
 RUN composer install --no-dev --no-interaction --optimize-autoloader --prefer-dist
 
