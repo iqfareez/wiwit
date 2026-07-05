@@ -2,7 +2,7 @@
 
 ## Getting Started for Developers
 
-Get your machine ready for Laravel development. You can install [Herd](https://herd.laravel.com/) and setup [Laravel](https://laravel.com/docs/13.x/installation#installing-php).
+Get your machine ready for Laravel development. You can install [Herd](https://herd.laravel.com/) and setup [Laravel](https://laravel.com/docs/12.x/installation#installing-php).
 
 Clone repository, then run the following command to install dependencies and setup other stuff:
 
