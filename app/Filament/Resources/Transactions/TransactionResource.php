@@ -21,6 +21,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
@@ -43,8 +44,16 @@ class TransactionResource extends Resource
             ->components([
                 TextInput::make('amount')
                     ->required()
-                    ->numeric()
-                    ->step('0.10'),
+                    ->rules(['numeric'])
+                    // To format the number to 2 decimal places when focus changes
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
+                        if ($state === null || $state === '' || ! is_numeric($state)) {
+                            return;
+                        }
+
+                        $set('amount', number_format((float) $state, 2, '.', ''));
+                    }),
                 Select::make('category_id')
                     ->relationship(
                         'category',
