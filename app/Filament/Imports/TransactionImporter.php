@@ -20,15 +20,17 @@ class TransactionImporter extends Importer
             ImportColumn::make('amount')
                 ->requiredMapping()
                 ->numeric()
-                ->rules(['required', 'integer']),
+                ->rules(['required', 'numeric']),
             ImportColumn::make('category')
                 ->guess(['category'])
                 ->relationship(resolveUsing: function (string $state): ?Category {
                     // Find or create category
                     $category = Category::firstOrCreate(
-                        ['name' => $state],
                         [
                             'user_id' => Auth::id(),
+                            'name' => $state,
+                        ],
+                        [
                             'is_active' => true,
                         ]
                     );

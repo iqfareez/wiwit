@@ -43,14 +43,26 @@ class TransactionResource extends Resource
             ->components([
                 TextInput::make('amount')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->step('0.10'),
                 Select::make('category_id')
-                    ->relationship('category', 'name')
+                    ->relationship(
+                        'category',
+                        'name',
+                        modifyQueryUsing: fn (Builder $query): Builder => $query
+                            ->where('user_id', auth()->id())
+                            ->where('is_active', true),
+                    )
                     ->searchable()
                     ->preload()
                     ->createOptionForm([
                         TextInput::make('name')
                             ->maxLength(255)
+                            ->scopedUnique(
+                                Category::class,
+                                ignoreRecord: true,
+                                modifyQueryUsing: fn (Builder $query): Builder => $query->where('user_id', auth()->id()),
+                            )
                             ->required(),
                     ])
                     ->createOptionUsing(fn (array $data): int => Category::create([
@@ -122,6 +134,12 @@ class TransactionResource extends Resource
         return [
             'index' => ManageTransactions::route('/'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('user_id', auth()->id());
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder

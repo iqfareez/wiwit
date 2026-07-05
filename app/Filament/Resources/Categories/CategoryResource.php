@@ -38,6 +38,10 @@ class CategoryResource extends Resource
             ->components([
                 TextInput::make('name')
                     ->maxLength(255)
+                    ->scopedUnique(
+                        ignoreRecord: true,
+                        modifyQueryUsing: fn (Builder $query): Builder => $query->where('user_id', auth()->id()),
+                    )
                     ->required(),
             ]);
     }
@@ -88,6 +92,12 @@ class CategoryResource extends Resource
         return [
             'index' => ManageCategories::route('/'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('user_id', auth()->id());
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder
