@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Transactions;
 
 use App\Filament\Imports\TransactionImporter;
 use App\Filament\Resources\Transactions\Pages\ManageTransactions;
+use App\Models\Category;
 use App\Models\Transaction;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
@@ -46,7 +47,17 @@ class TransactionResource extends Resource
                 Select::make('category_id')
                     ->relationship('category', 'name')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('name')
+                            ->maxLength(255)
+                            ->required(),
+                    ])
+                    ->createOptionUsing(fn (array $data): int => Category::create([
+                        ...$data,
+                        'user_id' => auth()->id(),
+                        'is_active' => true,
+                    ])->getKey()),
                 DatePicker::make('transaction_date')
                     ->required()
                     ->default(now()),
