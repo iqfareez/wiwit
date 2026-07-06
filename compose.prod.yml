@@ -25,6 +25,7 @@ services:
       MYSQL_DATABASE: wiwit
       MYSQL_USER: wiwit
       MYSQL_PASSWORD: replace-with-secure-password
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
     networks:
       - default
 

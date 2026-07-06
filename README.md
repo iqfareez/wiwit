@@ -1,5 +1,10 @@
 # Wiwit - A Finance Tracker App
 
+Try it live at [https://demo-wiwit.iqfareez.com](https://demo-wiwit.iqfareez.com).
+
+Email: `demo-user@example.com`\
+Password: `12345678`
+
 ## Getting Started for Developers
 
 Get your machine ready for Laravel development. You can install [Herd](https://herd.laravel.com/) and setup [Laravel](https://laravel.com/docs/12.x/installation#installing-php).
