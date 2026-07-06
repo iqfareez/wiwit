@@ -37,6 +37,9 @@ class TransactionImporter extends Importer
 
                     return $category;
                 }),
+            ImportColumn::make('title')
+                ->guess(['title'])
+                ->rules(['string', 'max:255', 'nullable']),
             ImportColumn::make('notes')
                 ->guess(['description'])
                 ->rules(['string', 'nullable']),

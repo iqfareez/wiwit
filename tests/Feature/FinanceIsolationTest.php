@@ -18,12 +18,14 @@ it('scopes finance resources to the current user', function () {
     $ownTransaction = Transaction::create([
         'user_id' => $user->id,
         'category_id' => $ownCategory->id,
+        'title' => 'Lunch',
         'amount' => 12.30,
         'transaction_date' => today(),
     ]);
     $otherTransaction = Transaction::create([
         'user_id' => $otherUser->id,
         'category_id' => $otherCategory->id,
+        'title' => 'Flight',
         'amount' => 67.80,
         'transaction_date' => today(),
     ]);
@@ -52,6 +54,7 @@ it('imports categories per user and allows cents', function () {
     ]), [
         'amount' => 'amount',
         'category' => 'category',
+        'title' => 'title',
         'notes' => 'notes',
         'transaction_date' => 'transaction_date',
     ], []);
@@ -59,6 +62,7 @@ it('imports categories per user and allows cents', function () {
     $importer([
         'amount' => '12.30',
         'category' => 'Food',
+        'title' => 'Lunch',
         'notes' => 'Lunch',
         'transaction_date' => today()->toDateString(),
     ]);
@@ -67,6 +71,7 @@ it('imports categories per user and allows cents', function () {
     $category = $transaction->category;
 
     expect($transaction->amount)->toBe('12.30')
+        ->and($transaction->title)->toBe('Lunch')
         ->and($category->user_id)->toBe($user->id)
         ->and($category->id)->not->toBe($otherCategory->id);
 });

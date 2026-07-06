@@ -36,12 +36,14 @@ class TransactionResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'Transactions';
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
+                TextInput::make('title')
+                    ->maxLength(255),
                 TextInput::make('amount')
                     ->required()
                     ->rules(['numeric'])
@@ -90,16 +92,16 @@ class TransactionResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('Transactions')
+            ->recordTitleAttribute('title')
             ->columns([
-                TextColumn::make('amount')
-                    ->numeric(decimalPlaces: 2)
-                    ->sortable()
-                    ->weight(fn (Transaction $record): string => $record->transaction_date->isToday() ? 'bold' : 'normal'),
-                TextColumn::make('notes')
+                TextColumn::make('title')
                     ->wrap()
                     ->limit(50)
                     ->searchable()
+                    ->weight(fn (Transaction $record): string => $record->transaction_date->isToday() ? 'bold' : 'normal'),
+                TextColumn::make('amount')
+                    ->numeric(decimalPlaces: 2)
+                    ->sortable()
                     ->weight(fn (Transaction $record): string => $record->transaction_date->isToday() ? 'bold' : 'normal'),
                 TextColumn::make('transaction_date')
                     ->date()
@@ -109,6 +111,11 @@ class TransactionResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->weight(fn (Transaction $record): string => $record->transaction_date->isToday() ? 'bold' : 'normal'),
+                TextColumn::make('notes')
+                    ->wrap()
+                    ->limit(20)
+                    ->weight(fn (Transaction $record): string => $record->transaction_date->isToday() ? 'bold' : 'normal')
+                    ->toggleable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
