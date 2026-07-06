@@ -1,0 +1,53 @@
+services:
+  app:
+    image: ghcr.io/iqfareez/wiwit:main
+    restart: unless-stopped
+    environment:
+      # Enable opcache in production
+      - PHP_OPCACHE_ENABLE=1
+      # Reverse proxy settings
+      - ENABLE_TRUSTED_PROXY_CONFIG=true
+      - TRUSTED_PROXIES=*
+    env_file:
+      - stack.env
+    depends_on:
+      - db
+    networks:
+      - default
+      - reverse_proxy
+
+  db:
+    image: mysql:8
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: wiwit
+      MYSQL_USER: wiwit
+      MYSQL_PASSWORD: replace-with-secure-password
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    networks:
+      - default
+
+# Uncomment the following to add phpMyAdmin to the stack. It will be available at http://localhost:9001
+# pma:
+#   image: phpmyadmin/phpmyadmin
+#   restart: unless-stopped
+#   environment:
+#     PMA_HOST: db
+#     PMA_PORT: 3306
+#   ports:
+#     - '9001:80'
+#   depends_on:
+#     - db
+#   networks:
+#     - default
+
+volumes:
+  db_data:
+
+networks:
+  default:
+  reverse_proxy:
+    name: proxy
+    external: true
