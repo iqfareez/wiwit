@@ -56,6 +56,14 @@ class TransactionImporter extends Importer
         ]);
     }
 
+    protected function beforeFill(): void
+    {
+        $amount = (float) $this->data['amount'];
+
+        $this->record->type = $amount > 0 ? 'income' : 'expense';
+        $this->data['amount'] = number_format(abs($amount), 2, '.', '');
+    }
+
     public static function getCompletedNotificationBody(Import $import): string
     {
         $body = 'Your transaction import has completed and '.Number::format($import->successful_rows).' '.str('row')->plural($import->successful_rows).' imported.';

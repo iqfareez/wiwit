@@ -44,9 +44,16 @@ class TransactionResource extends Resource
             ->components([
                 TextInput::make('title')
                     ->maxLength(255),
+                Select::make('type')
+                    ->options([
+                        'expense' => 'Expense',
+                        'income' => 'Income',
+                    ])
+                    ->default('expense')
+                    ->required(),
                 TextInput::make('amount')
                     ->required()
-                    ->rules(['numeric'])
+                    ->rules(['numeric', 'min:0'])
                     // To format the number to 2 decimal places when focus changes
                     ->live(onBlur: true)
                     ->afterStateUpdated(function (Set $set, ?string $state) {
@@ -100,7 +107,8 @@ class TransactionResource extends Resource
                     ->searchable()
                     ->weight(fn (Transaction $record): string => $record->transaction_date->isToday() ? 'bold' : 'normal'),
                 TextColumn::make('amount')
-                    ->numeric(decimalPlaces: 2)
+                    ->formatStateUsing(fn ($state, Transaction $record): string => ($record->type === 'income' ? '+' : '-').number_format((float) $state, 2, '.', ''))
+                    ->color(fn (Transaction $record): string => $record->type === 'income' ? 'success' : 'danger')
                     ->sortable()
                     ->weight(fn (Transaction $record): string => $record->transaction_date->isToday() ? 'bold' : 'normal'),
                 TextColumn::make('transaction_date')

@@ -13,6 +13,7 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'type',
         'amount',
         'category_id',
         'notes',
