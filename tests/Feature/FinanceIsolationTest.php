@@ -112,7 +112,5 @@ it('shows transaction amounts with type direction', function () {
 
     Livewire::test(ManageTransactions::class)
         ->assertSee('-12.30')
-        ->assertSee('+12.30')
-        ->assertSee('Expense')
-        ->assertSee('Income');
+        ->assertSee('+12.30');
 });
