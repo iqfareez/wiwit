@@ -49,4 +49,11 @@ class CashFlowIncomeChart extends ChartWidget
     {
         return 'doughnut';
     }
+
+    protected function getOptions(): array
+    {
+        return [
+            'cutout' => '60%',
+        ];
+    }
 }
