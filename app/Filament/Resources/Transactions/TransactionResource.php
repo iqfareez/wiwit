@@ -97,7 +97,7 @@ class TransactionResource extends Resource
                     ])->getKey()),
                 DatePicker::make('transaction_date')
                     ->required()
-                    ->default(now()),
+                    ->default(today()),
                 Textarea::make('notes')
                     ->columnSpanFull(),
             ]);
