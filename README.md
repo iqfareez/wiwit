@@ -33,4 +33,4 @@ Create Filament admin user:
 php artisan make:filament-user
 ```
 
-Then, navigate to `http://127.0.0.1:8000/admin/` in your browser to see the app running.
+Then, navigate to `http://127.0.0.1:8000/dashboard/` in your browser to see the app running.
