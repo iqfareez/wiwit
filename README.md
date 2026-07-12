@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/favicon.svg" width="128" height="128" alt="Wiwit logo">
+</p>
+
 # Wiwit - A Finance Tracker App
 
 Try it live at [https://demo-wiwit.iqfareez.com](https://demo-wiwit.iqfareez.com).
@@ -34,3 +38,7 @@ php artisan make:filament-user
 ```
 
 Then, navigate to `http://127.0.0.1:8000/dashboard/` in your browser to see the app running.
+
+## Attributions
+
+- App logo/favicons from https://solar-icons.vercel.app/icons?search=wallet&icon=wallet

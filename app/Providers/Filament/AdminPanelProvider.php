@@ -10,6 +10,7 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -26,6 +27,10 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('dashboard')
             ->login()
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): string => view('partials.favicons')->render(),
+            )
             ->colors([
                 'primary' => Color::Lime,
             ])
