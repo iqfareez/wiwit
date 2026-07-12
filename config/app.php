@@ -17,6 +17,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Version
+    |--------------------------------------------------------------------------
+    |
+    | This value identifies the deployed application version displayed in the
+    | Filament sidebar. Uses in UI only.
+    |
+    */
+
+    'version' => env('APP_VERSION'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |

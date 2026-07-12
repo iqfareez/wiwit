@@ -30,9 +30,6 @@ RUN composer install --no-dev --no-interaction --optimize-autoloader --prefer-di
 
 FROM serversideup/php:8.4-fpm-nginx-alpine AS final
 
-ARG APP_VERSION=local
-ENV APP_VERSION=$APP_VERSION
-
 USER root
 
 # Install php extensions: https://serversideup.net/open-source/docker-php/docs/customizing-the-image/installing-additional-php-extensions
@@ -51,3 +48,6 @@ RUN chown -R www-data:www-data storage bootstrap/cache && \
     chmod -R 775 storage bootstrap/cache
 
 USER www-data
+
+ARG APP_VERSION=local
+ENV APP_VERSION=$APP_VERSION

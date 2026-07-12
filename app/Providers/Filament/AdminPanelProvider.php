@@ -31,6 +31,10 @@ class AdminPanelProvider extends PanelProvider
                 PanelsRenderHook::HEAD_END,
                 fn (): string => view('partials.favicons')->render(),
             )
+            ->renderHook(
+                PanelsRenderHook::SIDEBAR_FOOTER,
+                fn (): string => view('partials.version')->render(),
+            )
             ->colors([
                 'primary' => Color::Lime,
             ])
