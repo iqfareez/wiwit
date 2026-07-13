@@ -1,11 +1,11 @@
-name: Publish Docker image
+name: Automatic Deployments
 
 on:
   workflow_dispatch:
 
 jobs:
   deploy:
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write # This is required for the Tailscale action to request a JWT from GitHub
