@@ -24,6 +24,6 @@ jobs:
       - name: Execute remote SSH commands using password
         uses: appleboy/ssh-action@v1
         with:
-          host: tomyam.eel-arowana.ts.net
-          username: deploy
+          host: ${{ vars.TARGET_HOST}}
+          username: ${{ vars.TARGET_USERNAME}}
           script: whoami
