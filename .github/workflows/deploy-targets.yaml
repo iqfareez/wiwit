@@ -1,0 +1,29 @@
+name: Publish Docker image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-slim
+    permissions:
+      contents: read
+      id-token: write # This is required for the Tailscale action to request a JWT from GitHub
+
+    steps:
+      - name: Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          audience: ${{ secrets.TS_AUDIENCE }}
+          tags: tag:ci
+
+      - name: Ping targets
+        run: tailscale ping tomyam.eel-arowana.ts.net
+
+      - name: Execute remote SSH commands using password
+        uses: appleboy/ssh-action@v1
+        with:
+          host: tomyam.eel-arowana.ts.net
+          username: deploy
+          script: whoami
