@@ -26,4 +26,7 @@ jobs:
         with:
           host: ${{ vars.TARGET_HOST}}
           username: ${{ vars.TARGET_USERNAME}}
-          script: whoami
+          password: dummy
+          script: |
+            whoami
+            echo "Hi there"
