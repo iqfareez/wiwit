@@ -5,6 +5,8 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+  release:
+    types: [published]
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -21,9 +23,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7.0.0
-
-      # Get commit ref and sha
-      - run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_ENV"
 
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache
@@ -47,6 +46,11 @@ jobs:
         uses: docker/metadata-action@v6.2.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=raw,value=${{ github.event.release.tag_name }},enable=${{ github.event_name == 'release' }}
+            type=raw,value=latest,enable=${{ github.event_name == 'release' }}
 
       # Build and push Docker image with Buildx
       # https://github.com/docker/build-push-action
@@ -60,6 +64,9 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            APP_VERSION=${{ github.ref_name }}@${{ env.SHORT_SHA }}
+            APP_COMMITSHA=${{ github.sha }}
+            APP_REFNAME=${{ github.ref_name }}
+            APP_RELEASETAG=${{ github.event.release.tag_name }}
+            APP_REPOSITORYURL=${{ github.server_url }}/${{ github.repository }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

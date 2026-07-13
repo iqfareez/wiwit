@@ -20,12 +20,18 @@ return [
     | Application Version
     |--------------------------------------------------------------------------
     |
-    | This value identifies the deployed application version displayed in the
-    | Filament sidebar. Uses in UI only.
+    | These values identify the deployed application build in the Filament
+    | sidebar. Uses in UI only.
     |
     */
 
-    'version' => env('APP_VERSION'),
+    'commit_sha' => env('APP_COMMITSHA'),
+
+    'ref_name' => env('APP_REFNAME'),
+
+    'release_tag' => env('APP_RELEASETAG'),
+
+    'repository_url' => env('APP_REPOSITORYURL'),
 
     /*
     |--------------------------------------------------------------------------
