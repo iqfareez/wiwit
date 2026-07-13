@@ -3,6 +3,8 @@ name: Automatic Deployments
 on:
   workflow_dispatch:
 
+concurrency: deploy-targets
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -26,7 +28,12 @@ jobs:
         with:
           host: ${{ vars.TARGET_HOST}}
           username: ${{ vars.TARGET_USERNAME}}
-          password: dummy
+          password: dummy # https://github.com/appleboy/ssh-action/issues/344#issuecomment-2906895821
           script: |
-            whoami
-            echo "Hi there"
+            set -e
+            cd /opt/stacks/wiwit
+            docker compose pull
+            docker compose up -d
+
+      - name: Write success
+        run: echo 'App deployed 🚀' >> $GITHUB_STEP_SUMMARY
