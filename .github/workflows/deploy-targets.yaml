@@ -22,7 +22,7 @@ jobs:
           audience: ${{ secrets.TS_AUDIENCE }}
           tags: tag:ci
 
-      - run: echo ${{ github.event }}
+      - run: echo '${{ toJson(github.event) }}'
 
       # - name: Ping targets
       #   run: tailscale ping tomyam.eel-arowana.ts.net
