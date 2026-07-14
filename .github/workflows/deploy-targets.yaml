@@ -2,6 +2,8 @@ name: Automatic Deployments
 
 on:
   workflow_dispatch:
+  registry_package:
+    types: [published]
 
 concurrency: deploy-targets
 
@@ -20,20 +22,28 @@ jobs:
           audience: ${{ secrets.TS_AUDIENCE }}
           tags: tag:ci
 
-      - name: Ping targets
-        run: tailscale ping tomyam.eel-arowana.ts.net
+      - run: echo ${{ github.event }}
 
-      - name: Execute remote SSH commands using password
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ vars.TARGET_HOST}}
-          username: ${{ vars.TARGET_USERNAME}}
-          password: dummy # https://github.com/appleboy/ssh-action/issues/344#issuecomment-2906895821
-          script: |
-            set -e
-            cd /opt/stacks/wiwit
-            docker compose pull
-            docker compose up -d
+      # - name: Ping targets
+      #   run: tailscale ping tomyam.eel-arowana.ts.net
 
-      - name: Write success
-        run: echo 'App deployed 🚀' >> $GITHUB_STEP_SUMMARY
+      # - name: Deploy Wiwit apps
+      #   uses: appleboy/ssh-action@v1
+      #   with:
+      #     host: ${{ vars.TARGET_HOST}}
+      #     username: ${{ vars.TARGET_USERNAME}}
+      #     password: dummy # https://github.com/appleboy/ssh-action/issues/344#issuecomment-2906895821
+      #     script: |
+      #       set -e
+
+      #       echo "Deploying Wiwit Production"
+      #       cd /opt/stacks/wiwit
+      #       docker compose pull
+      #       docker compose up -d
+
+      #       echo "Deploying Wiwit Demo"
+      #       cd /opt/stacks/demo-wiwit
+      #       docker compose up -d
+
+      # - name: Write success
+      #   run: echo 'App deployed 🚀' >> $GITHUB_STEP_SUMMARY
