@@ -23,10 +23,6 @@ jobs:
           audience: ${{ secrets.TS_AUDIENCE }}
           tags: tag:ci
 
-      # TODO: Keep for debugging purpose, will remove later
-      - name: print github event registry_package
-        run: echo '${{ toJson(github.event.registry_package) }}'
-
       - name: Ping target
         run: tailscale ping ${{ vars.TARGET_HOST}}
 
