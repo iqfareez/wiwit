@@ -1,15 +1,17 @@
-# Trigger deployment when new package is pushed
+# Trigger deployment after 'main' image has been published
 name: Automatic Deployments
 
 on:
-  registry_package:
-    types: [published]
+  workflow_run:
+    workflows: ["Publish Docker image"]
+    types: [completed]
+    branches: [main]
 
 concurrency: deploy-targets
 
 jobs:
   deploy:
-    if: github.event.registry_package.package_version.container_metadata.tag.name == 'main'
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -47,7 +49,5 @@ jobs:
 
       - name: Write summary
         run: |
-          echo '### Deployment succeeded' >> $GITHUB_STEP_SUMMARY
-          echo 'App deployed 🚀' >> $GITHUB_STEP_SUMMARY
-          echo 'Tag `"${{ github.event.registry_package.package_version.container_metadata.tag.name }}"`' >> $GITHUB_STEP_SUMMARY
-          echo 'Digest `"${{ github.event.registry_package.package_version.container_metadata.tag.digest }}"`' >> $GITHUB_STEP_SUMMARY
+          echo '### Deployment succeeded' >> "$GITHUB_STEP_SUMMARY"
+          echo 'App deployed 🚀' >> "$GITHUB_STEP_SUMMARY"
