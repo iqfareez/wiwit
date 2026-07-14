@@ -7,7 +7,7 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        @include('partials.favicons')
+        @include('partials.shared-head')
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

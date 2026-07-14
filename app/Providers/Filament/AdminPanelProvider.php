@@ -29,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->renderHook(
                 PanelsRenderHook::HEAD_END,
-                fn (): string => view('partials.favicons')->render(),
+                fn (): string => view('partials.shared-head')->render(),
             )
             ->renderHook(
                 PanelsRenderHook::SIDEBAR_FOOTER,
