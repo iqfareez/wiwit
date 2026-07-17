@@ -23,17 +23,18 @@ class DebtsTable
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('direction')
+                    ->label('Who owes whom?')
                     ->badge()
                     ->formatStateUsing(fn (string $state): string => $state === 'borrowed' ? 'I owe them' : 'They owe me')
                     ->color(fn (string $state): string => $state === 'borrowed' ? 'danger' : 'success'),
                 TextColumn::make('amount')
-                    ->label('Original amount')
                     ->formatStateUsing(fn ($state): string => number_format((float) $state, 2, '.', ''))
                     ->sortable(),
                 TextColumn::make('transactions_sum_amount')
                     ->label('Paid')
                     ->sum('transactions', 'amount')
-                    ->formatStateUsing(fn ($state): string => number_format((float) $state, 2, '.', '')),
+                    ->formatStateUsing(fn ($state): string => number_format((float) $state, 2, '.', ''))
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('remaining')
                     ->state(fn (Debt $record): string => $record->balance())
                     ->formatStateUsing(fn ($state): string => number_format((float) $state, 2, '.', '')),
@@ -48,7 +49,7 @@ class DebtsTable
                 TextColumn::make('notes')
                     ->limit(30)
                     ->wrap()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

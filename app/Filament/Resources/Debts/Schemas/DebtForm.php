@@ -27,6 +27,7 @@ class DebtForm
                     ->required()
                     ->maxLength(255),
                 Select::make('direction')
+                    ->label('Who owes whom?')
                     ->options([
                         'borrowed' => 'I owe them',
                         'lent' => 'They owe me',
