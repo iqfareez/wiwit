@@ -2,11 +2,15 @@
 
 use App\Filament\Imports\TransactionImporter;
 use App\Filament\Resources\Categories\CategoryResource;
+use App\Filament\Resources\Debts\DebtResource;
+use App\Filament\Resources\Debts\Pages\ListDebts;
 use App\Filament\Resources\Transactions\Pages\ManageTransactions;
 use App\Filament\Resources\Transactions\TransactionResource;
 use App\Models\Category;
+use App\Models\Debt;
 use App\Models\Transaction;
 use App\Models\User;
+use Filament\Actions\CreateAction;
 use Filament\Actions\Imports\Models\Import;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
@@ -113,4 +117,50 @@ it('shows transaction amounts with type direction', function () {
     Livewire::test(ManageTransactions::class)
         ->assertSee('-12.30')
         ->assertSee('+12.30');
+});
+
+it('creates, scopes, and settles debts for the current user', function () {
+    $user = User::factory()->create();
+    $otherUser = User::factory()->create();
+    $otherDebt = Debt::create([
+        'user_id' => $otherUser->id,
+        'other_person' => 'Someone else',
+        'direction' => 'lent',
+        'amount' => 50,
+        'borrowed_date' => today(),
+    ]);
+
+    $this->actingAs($user);
+
+    Livewire::test(ListDebts::class)
+        ->callAction(CreateAction::class, [
+            'other_person' => 'Auntie',
+            'direction' => 'borrowed',
+            'amount' => 25.50,
+            'borrowed_date' => today(),
+        ])
+        ->assertHasNoFormErrors();
+
+    $debt = Debt::where('user_id', $user->id)->sole();
+
+    $debt->transactions()->create([
+        'amount' => 5.50,
+        'paid_date' => today(),
+    ]);
+
+    expect($debt->balance())->toBe('20.00');
+
+    Livewire::test(ListDebts::class)
+        ->assertSee('Pending');
+
+    $payment = $debt->settle();
+
+    expect(DebtResource::getEloquentQuery()->pluck('id')->all())->toBe([$debt->id])
+        ->and(DebtResource::getRecordRouteBindingEloquentQuery()->find($otherDebt->id))->toBeNull()
+        ->and($payment?->amount)->toBe('20.00')
+        ->and($debt->fresh()->balance())->toBe('0.00')
+        ->and($debt->settle())->toBeNull();
+
+    Livewire::test(ListDebts::class)
+        ->assertSee('Settled');
 });
