@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Debts\RelationManagers;
 
+use App\Models\DebtTransaction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -37,7 +38,7 @@ class TransactionsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('paid_date')
+            ->recordTitle(fn (DebtTransaction $record): string => "{$record->amount} on {$record->paid_date->toDateString()}")
             ->columns([
                 TextColumn::make('amount')
                     ->formatStateUsing(fn ($state): string => number_format((float) $state, 2, '.', ''))
