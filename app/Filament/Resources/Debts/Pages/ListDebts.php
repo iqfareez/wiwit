@@ -4,9 +4,9 @@ namespace App\Filament\Resources\Debts\Pages;
 
 use App\Filament\Resources\Debts\DebtResource;
 use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListDebts extends ListRecords
+class ListDebts extends ManageRecords
 {
     protected static string $resource = DebtResource::class;
 
