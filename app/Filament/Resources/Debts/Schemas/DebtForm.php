@@ -12,6 +12,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Actions;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\Operation;
 use Filament\Support\Enums\VerticalAlignment;
@@ -35,8 +36,15 @@ class DebtForm
                     ->required(),
                 TextInput::make('amount')
                     ->required()
-                    ->numeric()
-                    ->minValue(0.01),
+                    ->rules(['numeric', 'min:0'])
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
+                        if ($state === null || $state === '' || ! is_numeric($state)) {
+                            return;
+                        }
+
+                        $set('amount', number_format((float) $state, 2, '.', ''));
+                    }),
                 DatePicker::make('borrowed_date')
                     ->label('Borrowed date')
                     ->default(today())
