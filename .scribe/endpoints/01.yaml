@@ -34,11 +34,11 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"type":"\/problems\/unauthenticated","title":"Unauthenticated","status":401,"detail":"Authentication credentials are missing or invalid.","instance":"\/api\/v1\/transactions"}'
+        status: 200
+        content: '{"data":[],"meta":{"page":1,"per_page":20,"total":0,"last_page":1},"links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions?per_page=20&page=1","method":"GET"},"first":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions?per_page=20&page=1","method":"GET"},"prev":null,"next":null,"last":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions?per_page=20&page=1","method":"GET"},"create":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions","method":"POST"}}}'
         headers:
           cache-control: 'no-cache, private'
-          content-type: application/problem+json
+          content-type: application/json
           access-control-allow-origin: '*'
         description: null
     responseFields: []
@@ -113,14 +113,14 @@ endpoints:
         name: id
         description: 'The ID of the transaction.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -129,8 +129,8 @@ endpoints:
     responses:
       -
         custom: []
-        status: 401
-        content: '{"type":"\/problems\/unauthenticated","title":"Unauthenticated","status":401,"detail":"Authentication credentials are missing or invalid.","instance":"\/api\/v1\/transactions\/architecto"}'
+        status: 404
+        content: '{"type":"\/problems\/not-found","title":"Resource not found","status":404,"detail":"The requested transaction was not found.","instance":"\/api\/v1\/transactions\/1"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/problem+json
@@ -171,14 +171,14 @@ endpoints:
         name: id
         description: 'The ID of the transaction.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -220,14 +220,14 @@ endpoints:
         name: id
         description: 'The ID of the transaction.'
         required: true
-        example: architecto
-        type: string
+        example: 1
+        type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: architecto
+      id: 1
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
