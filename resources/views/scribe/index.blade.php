@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Laravel API Documentation</title>
+    <title>Wiwit Local API Documentation</title>
     <meta charset="utf-8"/>
     <meta
         name="viewport"
@@ -17,7 +17,7 @@
 <script
     id="api-reference"
     
-    data-configuration="{&quot;theme&quot;:&quot;moon&quot;}"
+    data-configuration="{&quot;theme&quot;:&quot;fastify&quot;,&quot;defaultOpenAllTags&quot;:true}"
     data-url="{{ route("scribe.openapi") }}">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>

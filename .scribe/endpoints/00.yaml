@@ -1,19 +1,23 @@
-name: Endpoints
-description: ''
+name: Authentication
+description: |-
+
+  Authenticate the API
 endpoints:
   -
     custom: []
     httpMethods:
-      - GET
-    uri: api/user
+      - POST
+    uri: api/v1/auth/login
     metadata:
       custom: []
-      groupName: Endpoints
-      groupDescription: ''
+      groupName: Authentication
+      groupDescription: |-
+
+        Authenticate the API
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Get Token'
+      description: 'Obtain a bearer token using email and password credentials.'
       authenticated: false
       deprecated: false
     headers:
@@ -23,19 +27,46 @@ endpoints:
     cleanUrlParameters: []
     queryParameters: []
     cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
-    fileParameters: []
-    responses:
-      -
+    bodyParameters:
+      email:
         custom: []
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
+        name: email
+        description: 'Must be a valid email address. Must not be greater than 255 characters.'
+        required: true
+        example: gbailey@example.net
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: ''
+        required: true
+        example: '|]|{+-'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      device_name:
+        custom: []
+        name: device_name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: v
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      email: gbailey@example.net
+      password: '|]|{+-'
+      device_name: v
+    fileParameters: []
+    responses: []
     responseFields: []
     auth: []
     controller: null
