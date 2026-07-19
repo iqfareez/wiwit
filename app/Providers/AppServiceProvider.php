@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
                 config([
                     'database.default' => 'sqlite',
                     'database.connections.sqlite.database' => database_path('scribe.sqlite'),
+                    'scribe.database_connections_to_transact' => ['sqlite'],
                 ]);
             }
 

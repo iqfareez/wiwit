@@ -75,7 +75,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[{"id":1,"name":"Food","is_active":true,"created_at":"2026-07-19T05:20:18.000000Z","updated_at":"2026-07-19T05:20:18.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"DELETE"}}}],"meta":{"page":1,"per_page":20,"total":1,"last_page":1},"links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories?is_active=true&per_page=20&page=1","method":"GET"},"first":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories?is_active=true&per_page=20&page=1","method":"GET"},"prev":null,"next":null,"last":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories?is_active=true&per_page=20&page=1","method":"GET"},"create":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"POST"}}}'
+        content: '{"data":[{"id":1,"name":"Food","is_active":true,"created_at":"2026-07-19T06:45:56.000000Z","updated_at":"2026-07-19T06:45:56.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"DELETE"}}}],"meta":{"page":1,"per_page":20,"total":1,"last_page":1},"links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories?is_active=true&per_page=20&page=1","method":"GET"},"first":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories?is_active=true&per_page=20&page=1","method":"GET"},"prev":null,"next":null,"last":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories?is_active=true&per_page=20&page=1","method":"GET"},"create":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"POST"}}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -145,7 +145,7 @@ endpoints:
       -
         custom: []
         status: 201
-        content: '{"id":6,"name":"aut","is_active":true,"created_at":"2026-07-19T05:20:18.000000Z","updated_at":"2026-07-19T05:20:18.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/6","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/6","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/6","method":"DELETE"}}}'
+        content: '{"id":1,"name":"aut","is_active":true,"created_at":"2026-07-19T06:45:56.000000Z","updated_at":"2026-07-19T06:45:56.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"DELETE"}}}'
         headers: []
         description: ''
     responseFields: []
@@ -183,14 +183,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 1
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
@@ -200,7 +200,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"id":7,"name":"aut","is_active":true,"created_at":"2026-07-19T05:20:18.000000Z","updated_at":"2026-07-19T05:20:18.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/7","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/7","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/7","method":"DELETE"}}}'
+        content: '{"id":1,"name":"aut","is_active":true,"created_at":"2026-07-19T06:45:56.000000Z","updated_at":"2026-07-19T06:45:56.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"DELETE"}}}'
         headers: []
         description: ''
     responseFields: []
@@ -238,14 +238,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 1
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters:
@@ -279,7 +279,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"id":8,"name":"aut","is_active":true,"created_at":"2026-07-19T05:20:18.000000Z","updated_at":"2026-07-19T05:20:18.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/8","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/8","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/8","method":"DELETE"}}}'
+        content: '{"id":1,"name":"aut","is_active":true,"created_at":"2026-07-19T06:45:56.000000Z","updated_at":"2026-07-19T06:45:56.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"DELETE"}}}'
         headers: []
         description: ''
     responseFields: []
@@ -317,14 +317,14 @@ endpoints:
         name: id
         description: 'The ID of the category.'
         required: true
-        example: 1
+        example: 16
         type: integer
         enumValues: []
         exampleWasSpecified: false
         nullable: false
         deprecated: false
     cleanUrlParameters:
-      id: 1
+      id: 16
     queryParameters: []
     cleanQueryParameters: []
     bodyParameters: []
