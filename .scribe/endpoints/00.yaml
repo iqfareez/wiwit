@@ -55,7 +55,7 @@ endpoints:
         name: device_name
         description: 'A name for the device requesting the token.'
         required: true
-        example: 'My budgeting app'
+        example: "Iqmal's Iphone 16"
         type: string
         enumValues: []
         exampleWasSpecified: true
@@ -64,7 +64,7 @@ endpoints:
     cleanBodyParameters:
       email: demo-user@example.com
       password: '12345678'
-      device_name: 'My budgeting app'
+      device_name: "Iqmal's Iphone 16"
     fileParameters: []
     responses: []
     responseFields: []
