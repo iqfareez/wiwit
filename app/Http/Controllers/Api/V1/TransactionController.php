@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
+use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 
 /**
  * @group Transactions
@@ -54,6 +55,7 @@ class TransactionController extends Controller
     /**
      * Add a new transaction
      */
+    #[ResponseFromApiResource(TransactionResource::class, Transaction::class, status: 201, with: ['category'])]
     public function store(Request $request)
     {
         $transaction = Transaction::create([
@@ -68,6 +70,7 @@ class TransactionController extends Controller
     /**
      * Show a specified transaction
      */
+    #[ResponseFromApiResource(TransactionResource::class, Transaction::class, with: ['category'])]
     public function show(Request $request, string $transaction)
     {
         return new TransactionResource($this->find($request, $transaction));
@@ -76,6 +79,7 @@ class TransactionController extends Controller
     /**
      * Update a specified transaction
      */
+    #[ResponseFromApiResource(TransactionResource::class, Transaction::class, with: ['category'])]
     public function update(Request $request, string $transaction)
     {
         $model = $this->find($request, $transaction);

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
+use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 
 /**
  * @group Categories
@@ -47,6 +48,7 @@ class CategoryController extends Controller
     /**
      * Add new category
      */
+    #[ResponseFromApiResource(CategoryResource::class, Category::class, status: 201)]
     public function store(Request $request)
     {
         $validated = $this->validateWrite($request);
@@ -66,6 +68,7 @@ class CategoryController extends Controller
     /**
      * Show a specified Category
      */
+    #[ResponseFromApiResource(CategoryResource::class, Category::class)]
     public function show(Request $request, string $category)
     {
         return new CategoryResource($this->find($request, $category));
@@ -74,6 +77,7 @@ class CategoryController extends Controller
     /**
      * Update a specified Category
      */
+    #[ResponseFromApiResource(CategoryResource::class, Category::class)]
     public function update(Request $request, string $category)
     {
         $model = $this->find($request, $category);

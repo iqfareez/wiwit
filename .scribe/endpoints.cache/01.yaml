@@ -37,7 +37,7 @@ endpoints:
       -
         custom: []
         status: 200
-        content: '{"data":[],"meta":{"page":1,"per_page":20,"total":0,"last_page":1},"links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions?per_page=20&page=1","method":"GET"},"first":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions?per_page=20&page=1","method":"GET"},"prev":null,"next":null,"last":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions?per_page=20&page=1","method":"GET"},"create":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions","method":"POST"}}}'
+        content: '{"data":[{"id":1,"title":"Utilities","type":"expense","amount":"165.97","category":{"id":1,"name":"Food","is_active":true},"notes":null,"transaction_date":"2026-07-02","created_at":"2026-07-19T03:01:06.000000Z","updated_at":"2026-07-19T03:01:06.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/1","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/1","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/1","method":"DELETE"},"category":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/1","method":"GET"}}}],"meta":{"page":1,"per_page":20,"total":1,"last_page":1},"links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions?per_page=20&page=1","method":"GET"},"first":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions?per_page=20&page=1","method":"GET"},"prev":null,"next":null,"last":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions?per_page=20&page=1","method":"GET"},"create":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions","method":"POST"}}}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json
@@ -79,7 +79,13 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"id":2,"title":"Coffee","type":"expense","amount":"113.24","category":{"id":2,"name":"autem","is_active":true},"notes":null,"transaction_date":"2026-07-06","created_at":"2026-07-19T03:01:06.000000Z","updated_at":"2026-07-19T03:01:06.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/2","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/2","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/2","method":"DELETE"},"category":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/2","method":"GET"}}}'
+        headers: []
+        description: ''
     responseFields: []
     auth:
       - headers
@@ -131,13 +137,10 @@ endpoints:
     responses:
       -
         custom: []
-        status: 404
-        content: '{"type":"\/problems\/not-found","title":"Resource not found","status":404,"detail":"The requested transaction was not found.","instance":"\/api\/v1\/transactions\/1"}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/problem+json
-          access-control-allow-origin: '*'
-        description: null
+        status: 200
+        content: '{"id":3,"title":"Coffee","type":"expense","amount":"113.24","category":{"id":3,"name":"enim","is_active":true},"notes":null,"transaction_date":"2026-07-06","created_at":"2026-07-19T03:01:06.000000Z","updated_at":"2026-07-19T03:01:06.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/3","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/3","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/3","method":"DELETE"},"category":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/3","method":"GET"}}}'
+        headers: []
+        description: ''
     responseFields: []
     auth:
       - headers
@@ -186,7 +189,13 @@ endpoints:
     bodyParameters: []
     cleanBodyParameters: []
     fileParameters: []
-    responses: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"id":4,"title":"Coffee","type":"expense","amount":"113.24","category":{"id":4,"name":"voluptatem","is_active":true},"notes":null,"transaction_date":"2026-07-06","created_at":"2026-07-19T03:01:06.000000Z","updated_at":"2026-07-19T03:01:06.000000Z","links":{"self":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/4","method":"GET"},"collection":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions","method":"GET"},"update":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/4","method":"PATCH"},"delete":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/transactions\/4","method":"DELETE"},"category":{"href":"http:\/\/127.0.0.1:8000\/api\/v1\/categories\/4","method":"GET"}}}'
+        headers: []
+        description: ''
     responseFields: []
     auth:
       - headers
