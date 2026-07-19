@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
  */
 class AuthController extends Controller
 {
-    private const ABILITIES = ['read', 'create', 'update', 'delete'];
+    private const ABILITIES = ['view', 'create', 'update', 'delete'];
 
     /**
      * Get Token

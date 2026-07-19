@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             }
 
             Scribe::beforeResponseCall(function (Request $request) {
-                $abilities = ['read', 'create', 'update', 'delete'];
+                $abilities = ['view', 'create', 'update', 'delete'];
 
                 // create temporary user and its data. This is used when scribe wants to generate docs
                 // and response example. See:

@@ -16,7 +16,7 @@ test('api tokens can be created', function () {
         ->set(['createApiTokenForm' => [
             'name' => 'Test Token',
             'permissions' => [
-                'read',
+                'view',
                 'update',
             ],
         ]])
@@ -25,7 +25,7 @@ test('api tokens can be created', function () {
     expect($user->fresh()->tokens)->toHaveCount(1);
     expect($user->fresh()->tokens->first())
         ->name->toEqual('Test Token')
-        ->can('read')->toBeTrue()
+        ->can('view')->toBeTrue()
         ->can('delete')->toBeFalse();
 })->skip(function () {
     return ! Features::hasApiFeatures();

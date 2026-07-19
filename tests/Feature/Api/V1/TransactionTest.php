@@ -16,7 +16,7 @@ it('enforces authentication and token abilities', function () {
     Sanctum::actingAs($user, ['create']);
     $this->getJson('/api/v1/transactions')->assertForbidden();
 
-    Sanctum::actingAs($user, ['read']);
+    Sanctum::actingAs($user, ['view']);
     $this->getJson('/api/v1/transactions')->assertOk();
 
     $this->postJson('/api/v1/transactions', [
@@ -32,7 +32,7 @@ it('enforces authentication and token abilities', function () {
 it('creates updates lists and deletes owned transactions', function () {
     $user = User::factory()->create();
     $category = Category::create(['user_id' => $user->id, 'name' => 'Food']);
-    Sanctum::actingAs($user, ['read', 'create', 'update', 'delete']);
+    Sanctum::actingAs($user, ['view', 'create', 'update', 'delete']);
 
     $response = $this->postJson('/api/v1/transactions', [
         'title' => 'Lunch',
@@ -62,7 +62,7 @@ it('isolates transactions between users', function () {
     $user = User::factory()->create();
     $other = User::factory()->create();
     $transaction = Transaction::factory()->create(['user_id' => $user->id]);
-    Sanctum::actingAs($other, ['read']);
+    Sanctum::actingAs($other, ['view']);
 
     $this->getJson("/api/v1/transactions/{$transaction->id}")
         ->assertNotFound()
@@ -72,7 +72,7 @@ it('isolates transactions between users', function () {
 it('validates transaction filters and writes as problem details', function () {
     $user = User::factory()->create();
     $other = User::factory()->create();
-    Sanctum::actingAs($user, ['read', 'create']);
+    Sanctum::actingAs($user, ['view', 'create']);
     $inactive = Category::create(['user_id' => $user->id, 'name' => 'Inactive', 'is_active' => false]);
     $otherCategory = Category::create(['user_id' => $other->id, 'name' => 'Other']);
 
@@ -96,7 +96,7 @@ it('validates transaction filters and writes as problem details', function () {
 
 it('filters and stably orders paginated transactions', function () {
     $user = User::factory()->create();
-    Sanctum::actingAs($user, ['read']);
+    Sanctum::actingAs($user, ['view']);
     $older = Transaction::factory()->expense()->create([
         'user_id' => $user->id,
         'transaction_date' => '2026-07-10',

@@ -16,7 +16,7 @@ it('logs in and issues a full ability bearer token', function () {
         'device_name' => 'Budget app',
     ])->assertOk()
         ->assertJsonPath('token_type', 'Bearer')
-        ->assertJsonPath('abilities', ['read', 'create', 'update', 'delete'])
+        ->assertJsonPath('abilities', ['view', 'create', 'update', 'delete'])
         ->assertJsonPath('expires_at', null);
 
     $token = $response->json('token');

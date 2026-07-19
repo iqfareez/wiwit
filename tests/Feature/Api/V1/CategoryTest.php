@@ -7,7 +7,7 @@ use Laravel\Sanctum\Sanctum;
 
 it('creates updates and lists owned categories', function () {
     $user = User::factory()->create();
-    Sanctum::actingAs($user, ['read', 'create', 'update']);
+    Sanctum::actingAs($user, ['view', 'create', 'update']);
 
     $response = $this->postJson('/api/v1/categories', ['name' => 'Food'])
         ->assertCreated()
@@ -25,7 +25,7 @@ it('preserves historical transactions when deleting and recreating a category', 
     $user = User::factory()->create();
     $category = Category::create(['user_id' => $user->id, 'name' => 'Travel']);
     $transaction = Transaction::factory()->create(['user_id' => $user->id, 'category_id' => $category->id]);
-    Sanctum::actingAs($user, ['read', 'delete', 'create']);
+    Sanctum::actingAs($user, ['view', 'delete', 'create']);
 
     $this->deleteJson("/api/v1/categories/{$category->id}")->assertNoContent();
     $this->getJson("/api/v1/transactions/{$transaction->id}")
