@@ -9,7 +9,7 @@ Try it live at [https://demo-wiwit.iqfareez.com](https://demo-wiwit.iqfareez.com
 Email: `demo-user@example.com`\
 Password: `12345678`
 
-## Getting Started for Developers
+## Getting Started
 
 Get your machine ready for Laravel development. You can install [Herd](https://herd.laravel.com/) and setup [Laravel](https://laravel.com/docs/12.x/installation#installing-php).
 
@@ -38,6 +38,24 @@ php artisan make:filament-user
 ```
 
 Then, navigate to `http://127.0.0.1:8000/dashboard/` in your browser to see the app running.
+
+### Generate OpenAPI Docs
+
+Swagger docs is generated using [Scribe](https://scribe.knuckles.wtf/) package. Update the `APP_URL` in the environment, this will be used to populate the server URL in the swagger doc and do [response calls](https://scribe.knuckles.wtf/nodejs/documenting/responses#response-calls).
+
+To generate docs, run:
+
+```shell
+php artisan scribe:generate
+```
+
+See also `Scribe::beforeResponseCall` hook in [AppServiceProvider.php](./app/Providers/AppServiceProvider.php).
+
+Scribe will use `scribe.sqlite` to store temporary data when generating docs. This sqlite only contains database schema (no data). To regenerate this file, delete the existing `scribe.sqlite` and run:
+
+```shell
+DB_CONNECTION=sqlite DB_DATABASE=database/scribe.sqlite php artisan migrate
+```
 
 ## Attributions
 

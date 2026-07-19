@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             if (app()->runningInConsole() && in_array('scribe:generate', $_SERVER['argv'] ?? [], true)) {
                 config([
                     'database.default' => 'sqlite',
-                    'database.connections.sqlite.database' => database_path('docs.sqlite'),
+                    'database.connections.sqlite.database' => database_path('scribe.sqlite'),
                 ]);
             }
 
