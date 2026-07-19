@@ -21,7 +21,7 @@ RUN npm ci
 COPY --from=vendor /app/vendor ./vendor
 COPY app/Filament ./app/Filament
 COPY resources ./resources
-COPY vite.config.js tailwind.config.js ./
+COPY vite.config.js ./
 
 RUN npm run build
 
