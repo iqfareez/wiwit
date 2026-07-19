@@ -7,5 +7,6 @@ if [ ! -f "$APP_BASE_DIR/artisan" ]; then
 fi
 
 # Run the custom artisan command
+echo "📂 Generating swagger documentation..."
 php "$APP_BASE_DIR/artisan" scribe:generate
 exit 0
