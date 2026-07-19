@@ -31,40 +31,40 @@ endpoints:
       email:
         custom: []
         name: email
-        description: 'Must be a valid email address. Must not be greater than 255 characters.'
+        description: "The user's email address."
         required: true
-        example: gbailey@example.net
+        example: demo-user@example.com
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       password:
         custom: []
         name: password
-        description: ''
+        description: "The user's password."
         required: true
-        example: '|]|{+-'
+        example: '12345678'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
       device_name:
         custom: []
         name: device_name
-        description: 'Must not be greater than 255 characters.'
+        description: 'A name for the device requesting the token.'
         required: true
-        example: v
+        example: 'My budgeting app'
         type: string
         enumValues: []
-        exampleWasSpecified: false
+        exampleWasSpecified: true
         nullable: false
         deprecated: false
     cleanBodyParameters:
-      email: gbailey@example.net
-      password: '|]|{+-'
-      device_name: v
+      email: demo-user@example.com
+      password: '12345678'
+      device_name: 'My budgeting app'
     fileParameters: []
     responses: []
     responseFields: []

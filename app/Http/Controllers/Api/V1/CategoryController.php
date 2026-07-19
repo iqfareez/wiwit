@@ -24,6 +24,10 @@ class CategoryController extends Controller
     /**
      * List all categories
      *
+     * @queryParam page integer The page number. Example: 1
+     * @queryParam per_page integer The number of categories per page, from 1 to 100. Defaults to 20. Example: 20
+     * @queryParam is_active string Filter categories by active status. Enum: true, false Example: true
+     *
      * @return JsonResponse
      */
     public function index(Request $request)
@@ -47,6 +51,9 @@ class CategoryController extends Controller
 
     /**
      * Add new category
+     *
+     * @bodyParam name string required The category name. Maximum 255 characters. Example: Food
+     * @bodyParam is_active boolean Whether the category is active. Defaults to true. Example: true
      */
     #[ResponseFromApiResource(CategoryResource::class, Category::class, status: 201)]
     public function store(Request $request)
@@ -76,6 +83,9 @@ class CategoryController extends Controller
 
     /**
      * Update a specified Category
+     *
+     * @bodyParam name string The category name. Maximum 255 characters. Example: Food & Groceries
+     * @bodyParam is_active boolean Whether the category is active. Example: false
      */
     #[ResponseFromApiResource(CategoryResource::class, Category::class)]
     public function update(Request $request, string $category)

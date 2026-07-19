@@ -26,6 +26,10 @@ class AuthController extends Controller
      *
      * Obtain a bearer token using email and password credentials.
      *
+     * @bodyParam email string required The user's email address. Example: demo-user@example.com
+     * @bodyParam password string required The user's password. Example: 12345678
+     * @bodyParam device_name string required A name for the device requesting the token. Example: My budgeting app
+     *
      * @return JsonResponse
      */
     public function login(Request $request)
