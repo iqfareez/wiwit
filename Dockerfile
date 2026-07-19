@@ -1,21 +1,3 @@
-FROM node:24-alpine AS frontend
-
-WORKDIR /app
-
-COPY package.json package-lock.json ./
-
-RUN npm ci
-
-COPY resources/ ./resources/
-COPY vite.config.js ./
-COPY tailwind.config.js ./
-COPY postcss.config.js ./
-COPY resources ./resources
-COPY public ./public
-
-# Build frontend assets
-RUN npm run build
-
 FROM serversideup/php:8.4-cli-alpine AS vendor
 
 WORKDIR /app
@@ -27,6 +9,21 @@ USER root
 RUN install-php-extensions intl
 
 RUN composer install --no-dev --no-interaction --optimize-autoloader --prefer-dist
+
+FROM node:24-alpine AS frontend
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+
+RUN npm ci
+
+COPY --from=vendor /app/vendor ./vendor
+COPY app/Filament ./app/Filament
+COPY resources ./resources
+COPY vite.config.js tailwind.config.js ./
+
+RUN npm run build
 
 FROM serversideup/php:8.4-fpm-nginx-alpine AS final
 
