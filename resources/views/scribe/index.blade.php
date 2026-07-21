@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>Wiwit Local API Documentation</title>
+    <meta charset="utf-8"/>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"/>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script
+    id="api-reference"
+    
+    data-configuration="{&quot;theme&quot;:&quot;fastify&quot;,&quot;defaultOpenAllTags&quot;:true}"
+    data-url="{{ route("scribe.openapi") }}">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+</body>
+</html>

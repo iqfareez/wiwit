@@ -1,1 +1,4 @@
 *.sqlite*
+
+# used by scribe to generate documentation
+!scribe.sqlite
