@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
-use Illuminate\Validation\Rule;
 use Knuckles\Scribe\Attributes\ResponseFromApiResource;
 
 /**
@@ -26,7 +25,7 @@ class CategoryController extends Controller
      *
      * @queryParam page integer The page number. Example: 1
      * @queryParam per_page integer The number of categories per page, from 1 to 100. Defaults to 20. Example: 20
-     * @queryParam is_active string Filter categories by active status. Enum: true, false Example: true
+     * @queryParam show_inactive boolean Include inactive categories. Example: true
      *
      * @return JsonResponse
      */
@@ -35,12 +34,12 @@ class CategoryController extends Controller
         $validated = validator($request->query(), [
             'page' => ['sometimes', 'integer', 'min:1'],
             'per_page' => ['sometimes', 'integer', 'between:1,100'],
-            'is_active' => ['sometimes', Rule::in(['true', 'false'])],
+            'show_inactive' => ['sometimes', 'boolean'],
         ])->validate();
         $perPage = (int) ($validated['per_page'] ?? 20);
         $paginator = Category::query()
             ->where('user_id', $request->user()->getKey())
-            ->when(isset($validated['is_active']), fn ($query) => $query->where('is_active', $validated['is_active'] === 'true'))
+            ->when(! $request->boolean('show_inactive'), fn ($query) => $query->where('is_active', true))
             ->orderBy('name')
             ->orderBy('id')
             ->paginate($perPage);

@@ -18,7 +18,8 @@ it('creates updates and lists owned categories', function () {
         ->assertOk()
         ->assertJsonPath('is_active', false);
 
-    $this->getJson('/api/v1/categories?is_active=false')->assertJsonCount(1, 'data');
+    $this->getJson('/api/v1/categories')->assertJsonCount(0, 'data');
+    $this->getJson('/api/v1/categories?show_inactive=1')->assertJsonCount(1, 'data');
 });
 
 it('preserves historical transactions when deleting and recreating a category', function () {
