@@ -34,7 +34,7 @@ class CategoryController extends Controller
         $validated = validator($request->query(), [
             'page' => ['sometimes', 'integer', 'min:1'],
             'per_page' => ['sometimes', 'integer', 'between:1,100'],
-            'show_inactive' => ['sometimes', 'boolean'],
+            'show_inactive' => ['sometimes', 'in:true,false,1,0'],
         ])->validate();
         $perPage = (int) ($validated['per_page'] ?? 20);
         $paginator = Category::query()
