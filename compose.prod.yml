@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/iqfareez/wiwit:main
+    image: ghcr.io/wiwit-project/wiwit:main
     restart: unless-stopped
     environment:
       # Enable opcache in production
