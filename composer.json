@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "wiwit/finance-tracker",
+    "name": "wiwit-app/wiwit",
     "type": "project",
     "description": "A finance tracker app.",
     "keywords": [
